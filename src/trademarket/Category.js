@@ -15,7 +15,7 @@ class Category extends React.Component {
         this.indexStuffs();
     }
     componentDidUpdate(prevProps) {
-        if (this.props.match.params.CategoryId !== prevProps.match.params.CategoryId) {
+        if (this.props.match.params.categoryId !== prevProps.match.params.categoryId) {
             this.indexStuffs();
         }
     }

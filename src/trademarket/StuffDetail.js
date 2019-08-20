@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import DataHelper from '../DataHelper';
+import { inject } from 'mobx-react';
 
+@inject('authStore')
 class StuffDetail extends React.Component {
 
     constructor(props) {
@@ -29,12 +31,13 @@ class StuffDetail extends React.Component {
 
     purchase = () => {
         const stuffId_b = this.state.stuff.id;
+        const { authStore } = this.props;
         axios.post(
             DataHelper.baseURL() + '/stuffs/' + stuffId_b + '/purchase/',
         {},
         {
             headers: {
-                'Authorization': DataHelper.getAuthToken()
+                'Authorization': authStore.authToken
             }
         }
         ).then((response) => {
