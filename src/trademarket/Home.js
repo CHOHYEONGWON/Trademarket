@@ -27,9 +27,9 @@ class Home extends React.Component {
     
     render() { 
 
-        const stuffs_c = this.state.stuffs.map((stuff_b) => {
+        const stuffs_c = this.state.stuffs.map((stuff) => {
             return (
-                <StuffBox key={stuff_b.id} stuff_b={stuff_b}/>
+                <StuffBox key={stuff.id} stuff={stuff}/>
             )
         });
         return (

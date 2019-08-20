@@ -15,13 +15,13 @@ class Category extends React.Component {
     }
     componentDidUpdate(prevProps) {
         if (this.props.match.params.CategoryId !== prevProps.match.params.CategoryId) {
-            this.indexStuffs()
-        };
+            this.indexStuffs();
+        }
     }
 
     indexStuffs() {
-        const CategoryId = this.props.match.params.CategoryId;
-        axios.get('http://localhost:8010/categories/' + CategoryId +'/stuffs')
+        const categoryId = this.props.match.params.categoryId;
+        axios.get('http://localhost:8010/categories/' + categoryId +'/stuffs')
          .then((response) => {
             const stuffs = response.data;
             this.setState({
@@ -31,9 +31,9 @@ class Category extends React.Component {
     }
 
     render() {
-        const stuffs = this.state.stuffs.map((stuff_b) => {
+        const stuffs = this.state.stuffs.map((stuff) => {
             return (
-                <StuffBox key= {stuff_b.id} stuff = {stuff_b} />
+                <StuffBox key= {stuff.id} stuff = {stuff} />
             )
         });    
         return (

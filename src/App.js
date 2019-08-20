@@ -9,6 +9,7 @@ import Login from './trademarket/Login';
 import StuffDetail from './trademarket/StuffDetail'
 import MyStuffs from './trademarket/MyStuffs'
 import Category from './trademarket/Category'
+import CartStuffs from './trademarket/CartStuffs';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/stuffs/:stuffId' component={StuffDetail} />
         <Route exact path="/me/stuffs" component={MyStuffs} />
         <Route exact path='/categories/:categoryId' component = {Category} />
+        <Route exact path='/cart/stuffs/' component = {CartStuffs} />
       </Switch>
       <Footer />
     </Router>

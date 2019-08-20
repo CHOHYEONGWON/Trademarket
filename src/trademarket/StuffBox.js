@@ -3,26 +3,25 @@ import { withRouter } from 'react-router-dom';
 
 class StuffBox extends React.Component {
    
-    gotoPhoto = () => {
-        const stuff = this.props.stuff_b;
+    goToStuff = () => {
+        const stuff = this.props.stuff;
         this.props.history.push('/stuffs/' + stuff.id);
     }
 
     render() {
-        const stuff_b = this.props.stuff_b;
+        const stuff = this.props.stuff;
         const count = this.props.count;
-        let image = stuff_b.image;
-        
+        let image = stuff.image;   
         if (!image.startsWith('http')) {
-            image = 'http://127.0.0.1:8010/stuffs' + image;
+            image = 'http://127.0.0.1:8010' + image;
         }
         return (
-            <div className='item-container' onClick={this.gotoPhoto}>
+            <div className='item-container' onClick={this.goToStuff}>
                 <img src={image} alt="" />
-                <p className='item-title'>{stuff_b.title}</p>
+                <p className='item-title'>{stuff.title}</p>
                 <p className='item-price'>
                     {count ==null ?
-                    '가격:' + stuff_b.price :
+                    '가격:' + stuff.price + 'p' :
                     '개수:' + count}
                 </p>
             </div>

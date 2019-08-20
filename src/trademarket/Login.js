@@ -30,12 +30,12 @@ class Login extends React.Component {
             'http://localhost:8010/o/token/',
         {
             grant_type : "password",
-            client_id : "PkjQByHOwIPGd5R7nNpdPAolzEHCu6AUtQcg5c9w",
+            client_id : "cDoKLZHYVjbeYb4PpjudA2QxmLdvXLrna71YTGbH",
             username: this.state.username,
             password: this.state.password
         }).then((response) =>{
             const token = response.data;
-            localStorage.setItem('authorization', token.token_type + '' + token.access_token); 
+            localStorage.setItem('authorization', token.token_type + ' ' + token.access_token); 
             this.props.history.push('/');
         });
     }

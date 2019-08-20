@@ -41,6 +41,32 @@ class StuffDetail extends React.Component {
         });     
     }
 
+    addToCart = () => {
+        const stuff = this.state.stuff;
+        let cartStuffs = localStorage.getItem('cart_stuffs');
+        if (cartStuffs == null || cartStuffs.length < 1) {
+            cartStuffs = [];
+        } else {
+            cartStuffs = JSON.parse(cartStuffs);
+        }
+        let isAdded = false;
+        for (let cartStuff of cartStuffs) {
+            if (cartStuff.stuff.id === stuff.id) {
+                cartStuff.count++;
+                isAdded = true;
+                break;
+            }
+        }
+        if (!isAdded) {
+            cartStuffs.push({
+                stuff: stuff,
+                count: 1
+            });
+        }
+        localStorage.setItem('cart_stuffs', JSON.stringify(cartStuffs));
+        alert('장바구니 담기 완료!')
+    }
+
     render() {
         const stuff = this.state.stuff;
         const name = stuff ? stuff.name : "";
@@ -57,6 +83,7 @@ class StuffDetail extends React.Component {
                     </p>
                     <p>{desc}</p>
                     <button onClick={this.purchase}>구입</button>
+                    <button onClick={this.addToCart}>장바구니에 담기</button>
                 </div>
             </div>
         );

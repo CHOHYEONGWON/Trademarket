@@ -15,6 +15,23 @@ class MyStuffs extends React.Component {
 
     componentDidMount() {
         this.getMyStuffs();
+        this.getUser();
+    }
+
+    getUser = () => {
+        axios.get(
+            'http://localhost:8010/me/',
+            {
+                headers: {
+                    'Authorization' : localStorage.getItem('authorization')
+                }
+            }
+        ).then((response) => {
+            const user = response.data;
+            this.setState({
+                user: user
+            });
+        });
     }
 
     getMyStuffs = () => {
@@ -37,17 +54,17 @@ class MyStuffs extends React.Component {
         const user = this.state.user;
         const point = user ? user.point : 0;
         const stuffs = this.state.userStuffs.map((userStuff_d) => {
-            const stuff_b = userStuff_d.stuff;
+            const stuff = userStuff_d.stuff;
             return (
-                <StuffBox key={stuff_b.id}
-                stuff_b = {stuff_b}
+                <StuffBox key={stuff.id}
+                stuff = {stuff}
                 count={userStuff_d.count} />
             )
         });
         return (
             <div id='container'>
                 <h1>내 아이템 목록</h1>
-                <h2>잔고 : {point} </h2>
+                <h2>잔고 : {point}p </h2>
                 <div id="item-list-container">
                     {stuffs}
                 </div>
