@@ -45,10 +45,4 @@ decorate(DataHelper, {
     authToken: observable
 });
 
-const helper = new DataHelper();
-
-autorun(() => {
-    console.log(helper.authToken)
-});
-
 export default DataHelper;
