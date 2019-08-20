@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios'
 import StuffBox from './StuffBox';
 import { withRouter } from 'react-router-dom';
+import DataHelper from '../DataHelper';
 
 class MyStuffs extends React.Component {
 
@@ -20,7 +21,7 @@ class MyStuffs extends React.Component {
 
     getUser = () => {
         axios.get(
-            'http://localhost:8010/me/',
+            DataHelper.baseURL() + '/me/',
             {
                 headers: {
                     'Authorization' : localStorage.getItem('authorization')
@@ -36,7 +37,7 @@ class MyStuffs extends React.Component {
 
     getMyStuffs = () => {
         axios.get(
-            'http://localhost:8010/me/stuffs/',
+            DataHelper.baseURL() + '/me/stuffs/',
         {
             headers: {
                 'Authorization':localStorage.getItem('authorization')

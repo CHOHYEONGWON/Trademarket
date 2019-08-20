@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import DataHelper from '../DataHelper';
 
 class StuffBox extends React.Component {
    
@@ -13,7 +14,7 @@ class StuffBox extends React.Component {
         const count = this.props.count;
         let image = stuff.image;   
         if (!image.startsWith('http')) {
-            image = 'http://127.0.0.1:8010' + image;
+            image = DataHelper.baseURL() + image;
         }
         return (
             <div className='item-container' onClick={this.goToStuff}>

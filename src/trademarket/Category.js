@@ -1,6 +1,7 @@
 import React from 'react';
 import StuffBox from './StuffBox';
 import axios from 'axios';
+import DataHelper from '../DataHelper';
 
 class Category extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class Category extends React.Component {
 
     indexStuffs() {
         const categoryId = this.props.match.params.categoryId;
-        axios.get('http://localhost:8010/categories/' + categoryId +'/stuffs')
+        axios.get(DataHelper.baseURL() + '/categories/' + categoryId +'/stuffs/')
          .then((response) => {
             const stuffs = response.data;
             this.setState({

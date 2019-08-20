@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import DataHelper from '../DataHelper';
 
 class StuffDetail extends React.Component {
 
@@ -17,7 +18,7 @@ class StuffDetail extends React.Component {
 
     getStuff = () => {
         const stuffId_a = this.props.match.params.stuffId;
-        axios.get('http://localhost:8010/stuffs/' + stuffId_a)
+        axios.get(DataHelper.baseURL() + '/stuffs/' + stuffId_a)
             .then((response) => {
                 const stuff_s = response.data;
                 this.setState({
@@ -29,7 +30,7 @@ class StuffDetail extends React.Component {
     purchase = () => {
         const stuffId_b = this.state.stuff.id;
         axios.post(
-            'http://localhost:8010/stuffs/' + stuffId_b + '/purchase/',
+            DataHelper.baseURL() + '/stuffs/' + stuffId_b + '/purchase/',
         {},
         {
             headers: {

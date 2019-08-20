@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import StuffBox from './StuffBox';
+import DataHelper from '../DataHelper';
 
 class CartStuffs extends React.Component {
     
@@ -29,38 +30,29 @@ class CartStuffs extends React.Component {
     }  
 
     purchase = () => {
-        const stuffsQueue = [];
+        const stuffs = [];
         for (let cartStuff of this.state.cartStuffs) {
-            for (let i = 0; i < cartStuff.count; i++) {
-                stuffsQueue.push(cartStuff.stuff.id);
-            }
+            stuffs.push({
+                stuff_id: cartStuff.stuff.id,
+                count: cartStuff.count
+            })
         }
-        this.purchaseNextStuff(stuffsQueue);
-    }
-
-    purchaseNextStuff(stuffsQueue) {
-        console.log(stuffsQueue);
-        if (stuffsQueue.length < 1) {
-            localStorage.setItem('cart_stuffs', '[]');
-            this.props.history.push('/me/stuffs');
-        } else {
-            const stuffId = stuffsQueue.shift();
-            axios.post(
-                'http://localhost:8010/stuffs/' + stuffId + '/purchase/',
-                {},
-                {
-                    headers: {
-                        'Authorization': localStorage.getItem('authorization')
-                    }
+        axios.post(
+            DataHelper.baseURL() + '/stuffs/purchase/',
+            {
+                stuffs
+            },
+            {
+                headers: {
+                    'Authorization': localStorage.getItem('authorization')
                 }
-            ).then((response) => {
-                this.purchaseNextStuff(stuffsQueue);
-               
-            });
-
-        }
+            }
+        ).then((response) => {
+            localStorage.removeItem('cart_stuffs');
+            this.props.history.push('/me/stuffs');
+        });
     }
-
+        
     render() {
         const stuffs = this.state.cartStuffs.map((cartStuff) => {
             console.log(cartStuff);

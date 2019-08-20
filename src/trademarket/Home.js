@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import StuffBox from './StuffBox';
+import DataHelper from '../DataHelper';
 
 class Home extends React.Component {
     
@@ -16,7 +17,7 @@ class Home extends React.Component {
     }
 
     indexStuffs() {
-        axios.get('http://127.0.0.1:8010/stuffs/')
+        axios.get(DataHelper.baseURL() +'/stuffs/')
             .then((response) => {
                 const a = response.data;
                 this.setState({
