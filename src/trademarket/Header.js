@@ -2,13 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import DataHelper from '../DataHelper';
+import { autorun } from 'mobx';
 
 class Header extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             categories: []
         };
+        
+        const helper = new DataHelper();
+        autorun(() => {
+            console.log('header' + helper.authToken)
+        });
     }
 
     componentDidMount() {
@@ -18,7 +25,7 @@ class Header extends React.Component {
     indexcategories() {
         Axios.get(DataHelper.baseURL() + '/categories/')
         .then((response) => {
-            const categories = response = response.data;
+            const categories = response.data;
             this.setState({
                 categories: categories
             });
@@ -26,11 +33,11 @@ class Header extends React.Component {
     }
 
     render() {
-            const categories = this.state.categories.map((category) => {
-                return (
-                    <Link key= {category.id} to={'/categories/'+ category.id}>{category.title}</Link>
-                )
-            });
+        const categories = this.state.categories.map((category) => {
+            return (
+                <Link key= {category.id} to={'/categories/'+ category.id}>{category.title}</Link>
+            )
+        });
         return(
             <header>
                 <Link to='/'>Home</Link>
