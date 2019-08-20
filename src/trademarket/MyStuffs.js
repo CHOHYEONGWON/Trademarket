@@ -15,8 +15,8 @@ class MyStuffs extends React.Component {
     }
 
     componentDidMount() {
-        this.getMyStuffs();
         this.getUser();
+        this.getMyStuffs(); 
     }
 
     getUser = () => {
@@ -24,7 +24,7 @@ class MyStuffs extends React.Component {
             DataHelper.baseURL() + '/me/',
             {
                 headers: {
-                    'Authorization' : localStorage.getItem('authorization')
+                    'Authorization' : DataHelper.getAuthToken()
                 }
             }
         ).then((response) => {
@@ -40,7 +40,7 @@ class MyStuffs extends React.Component {
             DataHelper.baseURL() + '/me/stuffs/',
         {
             headers: {
-                'Authorization':localStorage.getItem('authorization')
+                'Authorization': DataHelper.getAuthToken()
             }
         }
         ).then((response) => {
@@ -54,12 +54,12 @@ class MyStuffs extends React.Component {
     render() {
         const user = this.state.user;
         const point = user ? user.point : 0;
-        const stuffs = this.state.userStuffs.map((userStuff_d) => {
-            const stuff = userStuff_d.stuff;
+        const stuffs = this.state.userStuffs.map((userStuff) => {
+            const stuff = userStuff.stuff;
             return (
                 <StuffBox key={stuff.id}
                 stuff = {stuff}
-                count={userStuff_d.count} />
+                count={userStuff.count} />
             )
         });
         return (

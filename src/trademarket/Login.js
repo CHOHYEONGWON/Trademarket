@@ -1,5 +1,5 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import DataHelper from '../DataHelper';
 
@@ -7,8 +7,8 @@ class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            username: "",
-            password: ""
+            username: "admin",
+            password: "admin"
         };
     }
 
@@ -33,9 +33,11 @@ class Login extends React.Component {
             client_id : "cDoKLZHYVjbeYb4PpjudA2QxmLdvXLrna71YTGbH",
             username: this.state.username,
             password: this.state.password
-        }).then((response) =>{
+        }
+        ).then((response) =>{
             const token = response.data;
-            localStorage.setItem('authorization', token.token_type + ' ' + token.access_token); 
+            console.log(response);
+            DataHelper.setAuthToken(token)
             this.props.history.push('/');
         });
     }
