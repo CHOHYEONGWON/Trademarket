@@ -5,11 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react';
 import AuthStore from './AuthStore';
+import StuffStore from './StuffStore';
 
 const authStore = new AuthStore();
+const stuffStore = new StuffStore();
 
 ReactDOM.render(
-    <Provider authStore={authStore}>
+    <Provider authStore={authStore} stuffStore={stuffStore}>
         <App />
     </Provider>, 
     document.getElementById('root')

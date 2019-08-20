@@ -4,7 +4,9 @@ import axios from 'axios';
 import DataHelper from '../DataHelper';
 import { inject } from 'mobx-react';
 
+@inject('authStore')
 class Login extends React.Component {
+    
     constructor(props) {
         super(props)
         this.state ={

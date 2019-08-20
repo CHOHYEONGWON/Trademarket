@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import DataHelper from '../DataHelper';
 import { inject } from 'mobx-react';
 
-@inject('authStore')
+@inject('authStore', 'stuffStore')
 class StuffDetail extends React.Component {
 
     constructor(props) {
@@ -46,28 +46,9 @@ class StuffDetail extends React.Component {
     }
 
     addToCart = () => {
+        const { stuffStore } = this.props;
         const stuff = this.state.stuff;
-        let cartStuffs = localStorage.getItem('cart_stuffs');
-        if (cartStuffs == null || cartStuffs.length < 1) {
-            cartStuffs = [];
-        } else {
-            cartStuffs = JSON.parse(cartStuffs);
-        }
-        let isAdded = false;
-        for (let cartStuff of cartStuffs) {
-            if (cartStuff.stuff.id === stuff.id) {
-                cartStuff.count++;
-                isAdded = true;
-                break;
-            }
-        }
-        if (!isAdded) {
-            cartStuffs.push({
-                stuff: stuff,
-                count: 1
-            });
-        }
-        localStorage.setItem('cart_stuffs', JSON.stringify(cartStuffs));
+        stuffStore.addStuffToCart(stuff);
         alert('장바구니 담기 완료!')
     }
 
