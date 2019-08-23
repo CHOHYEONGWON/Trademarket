@@ -33,7 +33,7 @@ class Login extends React.Component {
             DataHelper.baseURL() + '/o/token/',
         {
             grant_type : "password",
-            client_id : "cDoKLZHYVjbeYb4PpjudA2QxmLdvXLrna71YTGbH",
+            client_id : "N7KezaVYsw8oQxuTLvuHUo5NVHHSh7fBnkQaEbnP",
             username: this.state.username,
             password: this.state.password
         }

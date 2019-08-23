@@ -10,7 +10,7 @@ class DataHelper {
     }
 
     baseURL() {
-        return 'http://localhost:8010';
+        return 'http://http://api.pointmall.hyeongwon.site';
     }
 
     setAuthToken(token) {
