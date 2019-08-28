@@ -10,7 +10,7 @@ class DataHelper {
     }
 
     baseURL() {
-        return 'tm-api.hyeongwon.site';
+        return 'http://tm-api.hyeongwon.site';
     }
 
     setAuthToken(token) {
