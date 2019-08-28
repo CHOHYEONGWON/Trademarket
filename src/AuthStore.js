@@ -1,7 +1,7 @@
 import { observable, action, computed } from 'mobx';
 
 export default class AuthStore {
-    BASE_URL = "http://api.pointmall.hyeongwon.site";
+    BASE_URL = "tm-api.hyeongwon.site";
 
     @observable authToken = null;
 
